@@ -4,16 +4,21 @@ const glob = require('glob')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+// 原生CSS
+let extractCss = new ExtractTextPlugin('./css/[name]-raw.css')
+// Sass编译
+let extractScss = new ExtractTextPlugin('./css/[name].css')
+
+// 遍历所有HTML文件，根据这些文件进行打包
 let htmls = glob.sync('./view/**/*.html')
 let entries = {},
     htmlPlugins = []
-console.log(htmls)
 htmls.forEach(function(filePath) {
     let key = filePath.match(/.*(\S+)\.html$/)[1],
         value = `./src/js/${key}.js`;
     entries[key] = value
     htmlPlugins.push(new HtmlWebpackPlugin({
-        filename: `${key}.html`,
+        filename: `view/${key}.html`,
         chunks: [key],
         template: filePath,
     }))
@@ -36,22 +41,30 @@ module.exports = {
     module: {
         rules: [{
             test: /\.css$/,
-            use: ['style-loader', 'css-loader']
-            // use: ExtractTextPlugin.extract({
-            //     fallback: "style-loader",
-            //     use: "css-loader"
-            // })
+            // use: ['style-loader', 'css-loader'],
+            use: extractCss.extract({
+                fallback: 'style-loader',
+                use: ['css-loader', 'postcss-loader'],
+            }),
+        }, {
+            test: /\.scss$/,
+            use: extractScss.extract({
+                fallback: 'style-loader',
+                use: ['css-loader', 'postcss-loader', 'sass-loader'], // loader需要按照此先后顺序，否则报错
+            }),
         }]
     },
     resolve: {
         alias: {
-            '@CSS': path.resolve(__dirname, 'src/css'),
+            // '@CSS': path.resolve(__dirname, 'src/css'),
+            '@SCSS': path.resolve(__dirname, 'src/scss'),
             '@JS': path.resolve(__dirname, 'src/js'),
         }
     },
     devtool: 'source-map',
     plugins: [
         ...htmlPlugins,
-        // new ExtractTextPlugin("[name].css"),
+        extractCss,
+        extractScss,
     ]
 }
