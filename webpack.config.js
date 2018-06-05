@@ -1,13 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const glob = require('glob')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
-// 原生CSS
-let extractCss = new ExtractTextPlugin('./css/[name]-raw.css')
-// Sass编译
-let extractScss = new ExtractTextPlugin('./css/[name].css')
 
 // 遍历所有HTML文件，根据这些文件进行打包
 let htmls = glob.sync('./view/**/*.html')
@@ -18,15 +12,11 @@ htmls.forEach(function(filePath) {
         value = `./src/js/${key}.js`;
     entries[key] = value
     htmlPlugins.push(new HtmlWebpackPlugin({
-        filename: `view/${key}.html`,
-        chunks: [key],
-        template: filePath,
+        filename: `view/${key}.html`, // 如：view/index.html
+        chunks: [key], // 需要添加的JS
+        template: filePath, // HTML模版
     }))
 })
-
-// if(process.env.NODE_ENV === 'development') {
-
-// }
 
 module.exports = {
     // entry: {
@@ -34,37 +24,28 @@ module.exports = {
     //     b: './src/js/b.js',
     // },
     entry: entries,
-    output: {
-        filename: '[name].bundle.js',
-        path: __dirname + '/dist'
-    },
+    // output: output,
     module: {
         rules: [{
-            test: /\.css$/,
-            // use: ['style-loader', 'css-loader'],
-            use: extractCss.extract({
-                fallback: 'style-loader',
-                use: ['css-loader', 'postcss-loader'],
-            }),
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: ['babel-loader'],
+            // cacheDirectory: true,    // 缓存编译内容
         }, {
-            test: /\.scss$/,
-            use: extractScss.extract({
-                fallback: 'style-loader',
-                use: ['css-loader', 'postcss-loader', 'sass-loader'], // loader需要按照此先后顺序，否则报错
-            }),
-        }]
+            test: /\.(htm|html)$/i,
+            use: ['html-withimg-loader'],
+        }, ]
     },
     resolve: {
         alias: {
             // '@CSS': path.resolve(__dirname, 'src/css'),
             '@SCSS': path.resolve(__dirname, 'src/scss'),
             '@JS': path.resolve(__dirname, 'src/js'),
+            '@IMAGES': path.resolve(__dirname, 'src/images'),
         }
     },
     devtool: 'source-map',
     plugins: [
         ...htmlPlugins,
-        extractCss,
-        extractScss,
     ]
 }
