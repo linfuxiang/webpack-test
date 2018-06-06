@@ -1,7 +1,7 @@
 {
   "name": "wptest",
   "version": "1.0.0",
-  "description": "",
+  "description": "A project built by Webpack",
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode=development --config webpack.dev.js",
@@ -10,7 +10,7 @@
     "prod": "webpack --mode=production --config webpack.prod.js",
     "create": "node create.js"
   },
-  "author": "",
+  "author": "LFX",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^8.5.1",
