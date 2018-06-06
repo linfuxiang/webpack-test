@@ -2,6 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 const glob = require('glob')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 // 遍历所有HTML文件，根据这些文件进行打包
 let htmls = glob.sync('./view/**/*.html')
@@ -32,20 +33,26 @@ module.exports = {
             use: ['babel-loader'],
             // cacheDirectory: true,    // 缓存编译内容
         }, {
-            test: /\.(htm|html)$/i,
+            test: /\.(htm|html)$/,
             use: ['html-withimg-loader'],
-        }, ]
+        }, {
+            test: /\.vue$/,
+            use: ['vue-loader'],
+        }]
     },
     resolve: {
         alias: {
+            'vue': 'vue/dist/vue.common.js',
             // '@CSS': path.resolve(__dirname, 'src/css'),
             '@SCSS': path.resolve(__dirname, 'src/scss'),
             '@JS': path.resolve(__dirname, 'src/js'),
             '@IMAGES': path.resolve(__dirname, 'src/images'),
+            '@VUE': path.resolve(__dirname, 'src/vue'),
         }
     },
     devtool: 'source-map',
     plugins: [
         ...htmlPlugins,
+        new VueLoaderPlugin(),
     ]
 }

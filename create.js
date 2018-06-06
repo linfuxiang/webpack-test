@@ -1,35 +1,19 @@
 let fs = require('fs');
+let html_innerText = require('./templates/html')
+let css_innerText = require('./templates/scss')
+let js_innerText = require('./templates/js')
+
 let args = process.argv.slice(2);
 const htmlDir = './view/',
-    cssDir = './src/css/',
+    cssDir = './src/scss/',
     jsDir = './src/js/';
 const postfix = {
     html: '.html',
-    css: '.css',
+    css: '.scss',
     js: '.js',
 };
-var html_innerText = `<!doctype html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
-    <title></title>
-</head>
-
-<body>
-    <div class="page" id="app" v-cloak>
-    </div>
-    <script src="../src/${args[0]}.js"></script>
-</body>
-
-</html>`;
-
-var css_innerText = ``;
-
-var js_innerText = `import '@CSS/${args[0]}.css'
-import common from '@JS/lib/common.js'`;
-
+console.log(args)
 
 if (args && args.length) {
     if (checkFileExist(args[0] + postfix.html, htmlDir)) {

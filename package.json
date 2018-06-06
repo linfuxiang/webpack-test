@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode=development --config webpack.dev.js",
-    "dev-hot": "webpack-dev-server --mode=development --open --hot --config webpack.dev.js --open-page view/a.html",
+    "dev-hot": "webpack-dev-server --mode=development --open --hot --config webpack.dev.js --open-page view/a.html --port 9999",
     "test": "webpack --mode=development --config webpack.test.js",
-    "cdn": "webpack --mode=production --config webpack.prod.js",
+    "prod": "webpack --mode=production --config webpack.prod.js",
     "create": "node create.js"
   },
   "author": "",
@@ -28,12 +28,15 @@
     "postcss-loader": "^2.1.5",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
+    "vue-loader": "^15.2.4",
+    "vue-template-compiler": "^2.5.16",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.4",
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "babel-runtime": "^6.26.0"
+    "babel-runtime": "^6.26.0",
+    "vue": "^2.5.16"
   }
 }
