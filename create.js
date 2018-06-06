@@ -2,20 +2,29 @@ let fs = require('fs');
 let html_innerText = require('./templates/html')
 let css_innerText = require('./templates/scss')
 let js_innerText = require('./templates/js')
+let vue_innerText = require('./templates/vue')
 
 let args = process.argv.slice(2);
 const htmlDir = './view/',
     cssDir = './src/scss/',
-    jsDir = './src/js/';
+    jsDir = './src/js/',
+    vueDir = './src/vue/';
 const postfix = {
     html: '.html',
     css: '.scss',
     js: '.js',
+    vue: '.vue',
 };
 
-console.log(args)
-
-if (args && args.length) {
+if (args && args.length == 2 && args[1].toLowerCase() == 'vue') {
+    // 创建VUE组件
+    if (checkFileExist(args[0] + postfix.vue, vueDir)) {
+        console.log('\x1B[33m%s\x1B[0m', 'VUE File exists.');
+    } else {
+        writeFileSync(vueDir + args[0] + postfix.vue, vue_innerText);
+    }
+} else if (args && args.length) {
+    // 创建页面HTML/JS/SCSS
     if (checkFileExist(args[0] + postfix.html, htmlDir)) {
         console.log('\x1B[33m%s\x1B[0m', 'HTML File exists.');
     } else {
@@ -23,7 +32,7 @@ if (args && args.length) {
     }
 
     if (checkFileExist(args[0] + postfix.css, cssDir)) {
-        console.log('\x1B[33m%s\x1B[0m', 'css File exists.');
+        console.log('\x1B[33m%s\x1B[0m', 'CSS File exists.');
     } else {
         writeFileSync(cssDir + args[0] + postfix.css, css_innerText);
     }
