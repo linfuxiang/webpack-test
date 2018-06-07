@@ -6,6 +6,7 @@ const webpack = require('webpack')
 const glob = require('glob')
 const ExtractTextPlugin = require('extract-text-webpack-plugin') // 抽出CSS
 const CleanWebpackPlugin = require('clean-webpack-plugin') // 清理输出文件夹
+const apiMocker = require('webpack-api-mocker') // 清理输出文件夹
 
 let config = require('./webpack.config')
 
@@ -53,5 +54,11 @@ config.plugins = [
     extractScss,
     ...config.plugins
 ]
+
+config.devServer = {
+    before(app) {
+        apiMocker(app, path.resolve('./src/mocker/index.js'))
+    }
+}
 
 module.exports = config

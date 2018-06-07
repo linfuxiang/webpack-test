@@ -5,15 +5,15 @@ import Vue from 'vue'
 import test from '@VUE/e.vue'
 
 new Vue({
-	el: '#app',
-	data() {
-		return {
-			a: 'aaaaa'
-		}
-	},
-	components: {
-		test
-	},
+    el: '#app',
+    data() {
+        return {
+            a: 'aaaaa'
+        }
+    },
+    components: {
+        test
+    },
 })
 
 console.log(png)
@@ -50,3 +50,21 @@ function timeout(ms) {
 timeout(100).then((value) => {
     console.log(value);
 });
+
+fetch('/api/user', {})
+    .then((response) => response.json())
+    .then(data => {
+        console.log('data:', data);
+    })
+
+fetch('/api/a', {})
+    .then((response) => response.json())
+    .then(data => {
+        console.log('data:', data);
+    })
+
+fetch('/api/b', {})
+    .then((response) => response.json())
+    .then(data => {
+        console.log('data:', data);
+    })
