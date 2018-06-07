@@ -3,17 +3,18 @@ let html_innerText = require('./templates/html')
 let css_innerText = require('./templates/scss')
 let js_innerText = require('./templates/js')
 let vue_innerText = require('./templates/vue')
+let mock_innerText = require('./templates/mock')
 
 let args = process.argv.slice(2);
 const htmlDir = './view/',
     cssDir = './src/scss/',
     jsDir = './src/js/',
-    vueDir = './src/vue/';
+    mockDir = './src/mocker/';
 const postfix = {
     html: '.html',
     css: '.scss',
     js: '.js',
-    vue: '.vue',
+    mock: '.js',
 };
 
 if (args && args.length == 2 && args[1].toLowerCase() == 'vue') {
@@ -23,7 +24,14 @@ if (args && args.length == 2 && args[1].toLowerCase() == 'vue') {
     } else {
         writeFileSync(vueDir + args[0] + postfix.vue, vue_innerText);
     }
-} else if (args && args.length) {
+} else if (args && args.length == 2 && args[1].toLowerCase() == 'mock') {
+    // 创建Mock模拟数据文件
+    if (checkFileExist(args[0] + postfix.mock, mockDir)) {
+        console.log('\x1B[33m%s\x1B[0m', 'MOCK File exists.');
+    } else {
+        writeFileSync(mockDir + args[0] + postfix.mock, vue_innerText);
+    }
+}else if (args && args.length) {
     // 创建页面HTML/JS/SCSS
     if (checkFileExist(args[0] + postfix.html, htmlDir)) {
         console.log('\x1B[33m%s\x1B[0m', 'HTML File exists.');

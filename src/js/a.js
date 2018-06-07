@@ -14,6 +14,15 @@ new Vue({
     components: {
         test
     },
+    methods: {
+        getUser() {
+            fetch('/api/user', {})
+                .then((response) => response.json())
+                .then(data => {
+                    console.log('data:', data);
+                })
+        }
+    }
 })
 
 console.log(png)
