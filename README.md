@@ -7,8 +7,8 @@
 
 #### 创建文件  
 `node create.js a`在对应的目录下创建**a.html** , **a.js** , **a.scss**  
-`node create.js a vue`在**/src/vue**目录下创建**a.vue**单文件组件  
-`node create.js a mock`在**/src/mocker**目录下创建**a.js**的Mock文件  
+`node create.js a vue`在 **/src/vue** 目录下创建 **a.vue** 单文件组件  
+`node create.js a mock`在 **/src/mocker** 目录下创建 **a.js** 的Mock文件  
 
 #### 目录结构  
 
