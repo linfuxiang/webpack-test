@@ -5,10 +5,11 @@ const path = require('path')
 const webpack = require('webpack')
 const glob = require('glob')
 const ExtractTextPlugin = require('extract-text-webpack-plugin') // 抽出CSS
-const CleanWebpackPlugin = require('clean-webpack-plugin') // 清理输出文件夹
+// const CleanWebpackPlugin = require('clean-webpack-plugin') // 清理输出文件夹，无法删除项目文件外的文件
 
 let cdn_url = require('./config/prod.config')
 let config = require('./webpack.config')
+let fs_utils = require('./utils/fs')
 
 // 原生CSS
 let extractCss = new ExtractTextPlugin('css/[name]-raw.[chunkhash].css')
@@ -59,10 +60,12 @@ config.module.rules = [{
 }, ...config.module.rules]
 
 config.plugins = [
-    new CleanWebpackPlugin([cdn_url.house]),
+    // new CleanWebpackPlugin([cdn_url.house]), // 无法删除项目文件外的文件
     extractCss,
     extractScss,
     ...config.plugins
 ]
+
+fs_utils.removeDir(cdn_url.house.replace('\\', '/'))
 
 module.exports = config

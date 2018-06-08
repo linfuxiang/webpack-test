@@ -1,6 +1,6 @@
 import '@SCSS/a.scss'
 import common from '@JS/lib/common.js'
-import png from '../images/phoenix.jpg'
+import png from '@IMAGES/phoenix.jpg'
 import Vue from 'vue'
 import test from '@VUE/e.vue'
 
@@ -8,7 +8,7 @@ new Vue({
     el: '#app',
     data() {
         return {
-            a: 'aaaaa'
+            a: 'aaaaa',
         }
     },
     components: {
