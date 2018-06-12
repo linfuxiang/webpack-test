@@ -1,4 +1,5 @@
 import '@SCSS/a.scss'
+import '@SCSS/common/common.scss'
 import common from '@JS/lib/common.js'
 import png from '@IMAGES/phoenix.jpg'
 import Vue from 'vue'
@@ -43,22 +44,6 @@ class aaa {
 }
 
 // console.log([...sett]);
-
-function timeout1(ms) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-    });
-}
-
-function timeout(ms) {
-    return new Promise((resolve, reject) => {
-        setTimeout(resolve, ms, 'done');
-    });
-}
-
-timeout(100).then((value) => {
-    console.log(value);
-});
 
 fetch('/api/user', {})
     .then((response) => response.json())

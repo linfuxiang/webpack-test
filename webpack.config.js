@@ -14,7 +14,7 @@ htmls.forEach(function(filePath) {
     entries[key] = value
     htmlPlugins.push(new HtmlWebpackPlugin({
         filename: `view/${key}.html`, // 如：view/index.html
-        chunks: [key], // 需要添加的JS
+        chunks: ['commons', key], // 需要添加的JS
         template: filePath, // HTML模版
     }))
 })

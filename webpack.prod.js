@@ -63,8 +63,22 @@ config.plugins = [
     // new CleanWebpackPlugin([cdn_url.house]), // 无法删除项目文件外的文件
     extractCss,
     extractScss,
-    ...config.plugins
+    ...config.plugins,
 ]
+
+config.optimization = {
+    splitChunks: {
+        // name: "common",
+        // filename: 'common.[chunkhash].js',
+        cacheGroups: {
+            common: {
+                name: "common",
+                chunks: "initial",
+                minChunks: 2
+            }
+        }
+    }
+}
 
 fs_utils.removeDir(cdn_url.house.replace('\\', '/'))
 

@@ -57,6 +57,25 @@ config.plugins = [
     ...config.plugins
 ]
 
+config.optimization = {
+    splitChunks: {
+        // name: "common",
+        // filename: 'common.[chunkhash].js',
+        cacheGroups: {
+            // commons: {
+            //     test: /[\\/]node_modules[\\/]/,
+            //     name: 'vendors',
+            //     chunks: 'all'
+            // },
+            commons: {
+                name: 'commons',
+                chunks: 'initial',
+                minChunks: 2
+            },
+        }
+    }
+}
+
 fs_utils.removeDir(cdn_url.house.replace('\\', '/'))
 
 module.exports = config

@@ -55,6 +55,25 @@ config.plugins = [
     ...config.plugins
 ]
 
+config.optimization = {
+    splitChunks: {
+        // name: "common",
+        // filename: 'common.[chunkhash].js',
+        cacheGroups: {
+            // vendors: {
+            //     test: /[\\/]node_modules[\\/]/,
+            //     name: 'vendors',
+            //     chunks: 'all'
+            // },
+            commons: {
+                name: 'commons',
+                chunks: 'initial',
+                minChunks: 2
+            },
+        }
+    }
+}
+
 config.devServer = {
     before(app) {
         apiMocker(app, path.resolve('./src/mocker/index.js'))
