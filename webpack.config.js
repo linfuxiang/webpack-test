@@ -8,16 +8,26 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 let htmls = glob.sync('./view/**/*.html')
 let entries = {},
     htmlPlugins = []
+
+// entries.vue = 'vue/dist/vue.common.js'
+
 htmls.forEach(function(filePath) {
     let key = filePath.match(/.*(\S+)\.html$/)[1],
         value = `./src/js/${key}.js`;
     entries[key] = value
     htmlPlugins.push(new HtmlWebpackPlugin({
+        // favicon: 'favicon.ico',
         filename: `view/${key}.html`, // 如：view/index.html
         chunks: ['commons', key], // 需要添加的JS
         template: filePath, // HTML模版
+        chunksSortMode: 'manual',
+        meta: {
+            charset: "UTF-8",
+            viewport: 'initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no',
+        }
     }))
 })
+
 
 module.exports = {
     // entry: {

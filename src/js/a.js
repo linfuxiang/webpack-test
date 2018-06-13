@@ -1,7 +1,7 @@
-import '@SCSS/a.scss'
 import '@SCSS/common/common.scss'
-import common from '@JS/lib/common.js'
+import '@SCSS/a.scss'
 import png from '@IMAGES/phoenix.jpg'
+import common from '@JS/lib/common'
 import Vue from 'vue'
 import test from '@VUE/e.vue'
 
