@@ -1,5 +1,7 @@
 import '@SCSS/common/common.scss'
 import '@SCSS/b.scss'
+import common from '@JS/lib/common'
+import Vue from 'vue'
 
 console.log('%cHello Parcel!', 'color:red;');
 common.consoleLog('Hello Parcel!');

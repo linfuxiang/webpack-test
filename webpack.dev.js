@@ -55,20 +55,34 @@ config.plugins = [
     ...config.plugins
 ]
 
+// config.optimization = {
+//     splitChunks: {
+//         // name: "common",
+//         // filename: 'common.[chunkhash].js',
+//         cacheGroups: {
+//             // vendors: {
+//             //     test: /[\\/]node_modules[\\/]/,
+//             //     name: 'vendors',
+//             //     chunks: 'all'
+//             // },
+//             commons: {
+//                 name: 'commons',
+//                 chunks: 'initial',
+//                 minChunks: 2
+//             },
+//         }
+//     }
+// }
+
 config.optimization = {
     splitChunks: {
-        // name: "common",
-        // filename: 'common.[chunkhash].js',
         cacheGroups: {
-            // vendors: {
-            //     test: /[\\/]node_modules[\\/]/,
-            //     name: 'vendors',
-            //     chunks: 'all'
-            // },
-            commons: {
-                name: 'commons',
-                chunks: 'initial',
-                minChunks: 2
+            vendors: {
+                test: /[\\/]node_modules[\\/]/,
+            },
+            default: {
+                minChunks: 2,
+                reuseExistingChunk: true,
             },
         }
     }

@@ -18,7 +18,7 @@ htmls.forEach(function(filePath) {
     htmlPlugins.push(new HtmlWebpackPlugin({
         // favicon: 'favicon.ico',
         filename: `view/${key}.html`, // 如：view/index.html
-        chunks: ['commons', key], // 需要添加的JS
+        chunks: ['vendors', 'common', key], // 需要添加的JS
         template: filePath, // HTML模版
         chunksSortMode: 'manual',
         meta: {
