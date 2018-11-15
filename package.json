@@ -4,7 +4,7 @@
   "description": "A project built by Webpack",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode=development --config webpack.dev.js",
+    "dev": "webpack-dev-server --mode=development --hot --config webpack.dev.js --port 9999",
     "dev-hot": "webpack-dev-server --mode=development --open --hot --config webpack.dev.js --open-page view/a.html --port 9999",
     "test": "webpack --mode=development --config webpack.test.js",
     "prod": "webpack --mode=production --config webpack.prod.js",
